@@ -1,7 +1,16 @@
+DROP TABLE IF EXISTS Works_With;
+DROP TABLE IF EXISTS Buyer;
+DROP TABLE IF EXISTS Listings;
+DROP TABLE IF EXISTS Agent;
+DROP TABLE IF EXISTS Firm;
+DROP TABLE IF EXISTS BusinessProperty;
+DROP TABLE IF EXISTS House;
+DROP TABLE IF EXISTS Property;
+
 CREATE TABLE PROPERTY (
     address VARCHAR(50) PRIMARY KEY,
-    ownerName VARCHAR(30),
-    price INTEGER
+    ownerName VARCHAR(30) NOT NULL,
+    price INTEGER NOT NULL
 );
 
 CREATE TABLE HOUSE (
@@ -62,3 +71,66 @@ CREATE TABLE WORKS_WITH (
     FOREIGN KEY (buyerId) REFERENCES BUYER(id),
     FOREIGN KEY (agentId) REFERENCES AGENT(agentId)
 );
+
+INSERT INTO PROPERTY (address, ownerName, price) VALUES
+    ('123 Maple St', 'John Doe', 250000),
+    ('456 Oak St', 'Jane Smith', 150000),
+    ('789 Pine St', 'Tom Brown', 200000),
+    ('321 Elm St', 'Mary White', 400000),
+    ('654 Cedar St', 'Alice Green', 500000),
+    ('100 Main St','James Johnson',1000000),
+    ('200 7th Ave','Guy Normal',100000),
+    ('5000 Office Blvd','Geoff Pesos',2000000),
+    ('15 Enterprise Rd','Alan Alexander',350000),
+    ('930 N Government Dr','Steph Works',900000);
+
+
+INSERT INTO HOUSE (bedrooms, bathrooms, size, address) VALUES
+    (4,2,3300,'123 Maple St'),
+    (3,2,1000,'456 Oak St'),
+    (3,2,2500,'789 Pine St'),
+    (5,3,4500,'321 Elm St'),
+    (6,4,6000,'654 Cedar St');
+
+INSERT INTO BUSINESS_PROPERTY (type, size, address) VALUES
+    ('Gas Station', 20000, '100 Maple St'),
+    ('Office Space',1000,'200 7th Ave'),
+    ('Office Space', 30000,'5000 Office Blvd'),
+    ('Office Space',5000,'15 Enterprise Rd'),
+    ('Govt. Building',7500,'930 N Government Dr');
+
+INSERT INTO Firm (id, name, address) VALUES
+    (1, 'Best Realty', '1 Agency Blvd'),
+    (2, 'Sunshine Properties', '2 Sunshine Lane'),
+    (3, 'Elite Homes', '3 Prestige Avenue'),
+    (4, 'Urban Realty', '4 Downtown St'),
+    (5, 'Luxury Estates', '5 High-End Way');
+
+
+INSERT INTO AGENT (agentId, name, phone, firmId, dateStarted) VALUES
+    (1, 'Agent A', '123-456-7890', 1, '2024-01-01'),
+    (2, 'Agent B', '234-567-8901', 2, '2023-06-15'),
+    (3, 'Agent C', '345-678-9012', 3, '2022-08-10'),
+    (4, 'Agent D', '456-789-0123', 4, '2021-03-20'),
+    (5, 'Agent E', '567-890-1234', 5, '2020-12-01');
+
+INSERT INTO LISTINGS (mlsNumber, address, agentId, dateListed) VALUES
+    (1,'123 Maple St', 5,'2023-02-02'),
+    (2,'321 Elm St',3, '2024-11-11'),
+    (3,'5000 Office Blvd',1,'2020-04-20'),
+    (4,'15 Enterprise Rd',2,'2021-10-31'),
+    (5,'100 Maple St',4,'2024-08-25');
+
+INSERT INTO Buyer (id, name, phone, propertyType, bedrooms, bathrooms, businessPropertyType, minimumPreferredPrice, maximumPreferredPrice) VALUES
+    (1, 'John Smith', '111-111-1111', 'House', 3, 2, NULL, 100000, 300000),
+    (2, 'Jane Doe', '222-222-2222', 'House', 4, 2, NULL, 200000, 400000),
+    (3, 'Tom Johnson', '333-333-3333', 'Business', NULL, NULL, 'Office Space', 300000, 500000),
+    (4, 'Alice White', '444-444-4444', 'Business', NULL, NULL, 'Govt. Building', 800000, 1200000),
+    (5, 'Bob Brown', '555-555-5555', 'House', 5, 3, NULL, 350000, 600000);
+
+INSERT INTO Works_With (buyerId, agentId) VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5);
