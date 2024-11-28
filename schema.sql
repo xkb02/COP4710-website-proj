@@ -1,11 +1,6 @@
-DROP TABLE IF EXISTS Works_With;
-DROP TABLE IF EXISTS Buyer;
-DROP TABLE IF EXISTS Listings;
-DROP TABLE IF EXISTS Agent;
-DROP TABLE IF EXISTS Firm;
-DROP TABLE IF EXISTS BusinessProperty;
-DROP TABLE IF EXISTS House;
-DROP TABLE IF EXISTS Property;
+DROP DATABASE IF EXISTS RealEst;
+CREATE DATABASE RealEst;
+USE RealEst;
 
 CREATE TABLE PROPERTY (
     address VARCHAR(50) PRIMARY KEY,
@@ -82,18 +77,23 @@ INSERT INTO PROPERTY (address, ownerName, price) VALUES
     ('200 7th Ave','Guy Normal',100000),
     ('5000 Office Blvd','Geoff Pesos',2000000),
     ('15 Enterprise Rd','Alan Alexander',350000),
-    ('930 N Government Dr','Steph Works',900000);
-
+    ('930 N Government Dr','Steph Works',900000),
+    ('111 Lake Ave', 'Sarah Wilson', 180000),
+    ('222 River Rd', 'Mike Johnson', 220000),
+    ('333 Forest Ln', 'Emma Davis', 195000);
 
 INSERT INTO HOUSE (bedrooms, bathrooms, size, address) VALUES
     (4,2,3300,'123 Maple St'),
     (3,2,1000,'456 Oak St'),
     (3,2,2500,'789 Pine St'),
     (5,3,4500,'321 Elm St'),
-    (6,4,6000,'654 Cedar St');
+    (6,4,6000,'654 Cedar St'),
+    (3,2,1800,'111 Lake Ave'),
+    (3,2,2200,'222 River Rd'),
+    (4,2,2800,'333 Forest Ln');
 
 INSERT INTO BUSINESS_PROPERTY (type, size, address) VALUES
-    ('Gas Station', 20000, '100 Maple St'),
+    ('Gas Station', 20000, '100 Main St'),
     ('Office Space',1000,'200 7th Ave'),
     ('Office Space', 30000,'5000 Office Blvd'),
     ('Office Space',5000,'15 Enterprise Rd'),
@@ -105,7 +105,6 @@ INSERT INTO Firm (id, name, address) VALUES
     (3, 'Elite Homes', '3 Prestige Avenue'),
     (4, 'Urban Realty', '4 Downtown St'),
     (5, 'Luxury Estates', '5 High-End Way');
-
 
 INSERT INTO AGENT (agentId, name, phone, firmId, dateStarted) VALUES
     (1, 'Agent A', '123-456-7890', 1, '2024-01-01'),
@@ -119,7 +118,12 @@ INSERT INTO LISTINGS (mlsNumber, address, agentId, dateListed) VALUES
     (2,'321 Elm St',3, '2024-11-11'),
     (3,'5000 Office Blvd',1,'2020-04-20'),
     (4,'15 Enterprise Rd',2,'2021-10-31'),
-    (5,'100 Maple St',4,'2024-08-25');
+    (5,'100 Main St',4,'2024-08-25'),
+    (6,'456 Oak St', 1,'2024-01-15'),
+    (7,'789 Pine St', 2,'2024-02-01'),
+    (8,'111 Lake Ave', 3,'2024-01-20'),
+    (9,'222 River Rd', 4,'2024-02-15'),
+    (10,'333 Forest Ln', 5,'2024-03-01');
 
 INSERT INTO Buyer (id, name, phone, propertyType, bedrooms, bathrooms, businessPropertyType, minimumPreferredPrice, maximumPreferredPrice) VALUES
     (1, 'John Smith', '111-111-1111', 'House', 3, 2, NULL, 100000, 300000),
@@ -133,4 +137,7 @@ INSERT INTO Works_With (buyerId, agentId) VALUES
     (2, 2),
     (3, 3),
     (4, 4),
-    (5, 5);
+    (5, 5),
+    (1, 2),
+    (2, 3),
+    (3, 4);
